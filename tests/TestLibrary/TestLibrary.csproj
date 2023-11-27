@@ -1,0 +1,15 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+	<EnableDynamicLoading>true</EnableDynamicLoading>
+	<BaseOutputPath>bin\</BaseOutputPath>
+  </PropertyGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="copy /Y &quot;$(TargetDir)$(TargetName).*&quot; &quot;$(SolutionDir)FunctionalityСheck\$(TargetName).*&quot;" />
+  </Target>
+
+</Project>
