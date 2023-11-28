@@ -3,7 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34316.72
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins.Modules", "Safin.Plugins.Modules\Safin.Plugins.Modules.csproj", "{E4664BCC-F329-4D51-A570-F816BCA71BA5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules", "Safin.Plugins.Modules\Safin.Plugins.Modules.csproj", "{E4664BCC-F329-4D51-A570-F816BCA71BA5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins.Scripts", "Safin.Plugins.Scripts\Safin.Plugins.Scripts.csproj", "{337C7806-45DA-418A-A771-C9DF8001DC4B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins.Abstractions", "Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj", "{546940DD-CE4F-451D-B391-CCF2AAA12481}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins.Stores.FileStorage", "Safin.Plugins.Stores.FileStorage\Safin.Plugins.Stores.FileStorage.csproj", "{1349C93C-E22C-4F81-9FB9-935E736D1148}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +21,18 @@ Global
 		{E4664BCC-F329-4D51-A570-F816BCA71BA5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E4664BCC-F329-4D51-A570-F816BCA71BA5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E4664BCC-F329-4D51-A570-F816BCA71BA5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{337C7806-45DA-418A-A771-C9DF8001DC4B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{337C7806-45DA-418A-A771-C9DF8001DC4B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{337C7806-45DA-418A-A771-C9DF8001DC4B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{337C7806-45DA-418A-A771-C9DF8001DC4B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{546940DD-CE4F-451D-B391-CCF2AAA12481}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{546940DD-CE4F-451D-B391-CCF2AAA12481}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{546940DD-CE4F-451D-B391-CCF2AAA12481}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{546940DD-CE4F-451D-B391-CCF2AAA12481}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
