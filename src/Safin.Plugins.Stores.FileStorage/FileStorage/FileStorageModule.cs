@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Stores.FileStorage
 {
-    public class FileStorageModule : IAssemblyModuleStore
+    public class FileStorageModule : IAssemblyModuleStore, ICSXScriptStore
     {
         public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload)
         {
@@ -21,6 +21,15 @@ namespace Safin.Plugins.Stores.FileStorage
         public AssemblyName GetAssemblyName(string name)
         {
             return new AssemblyName(Path.GetFileNameWithoutExtension(name));
+        }
+
+        public Task LoadAsync(string name, Action<Stream> loadFromStream, Action<string> loadFromString)
+        {
+            using var stream = new FileStream(name, FileMode.Open, FileAccess.Read);
+            loadFromStream(stream);
+            stream.Close();
+
+            return Task.CompletedTask;
         }
     }
 }

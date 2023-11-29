@@ -25,7 +25,14 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\Safin.Plugins.Modules\Safin.Plugins.Modules.csproj" />
+    <ProjectReference Include="..\..\src\Safin.Plugins.Scripts\Safin.Plugins.Scripts.csproj" />
     <ProjectReference Include="..\..\src\Safin.Plugins.Stores.FileStorage\Safin.Plugins.Stores.FileStorage.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="Scripts\test1.csx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>
