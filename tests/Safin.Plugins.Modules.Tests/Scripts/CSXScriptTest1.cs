@@ -24,5 +24,15 @@ namespace Safin.Plugins.Modules.Tests.Scripts
             Assert.NotNull(result);
             Assert.Equal(100, (int)result);
         }
+        [Fact]
+        public async Task ExecuteFileTest2()
+        {
+            ICSXScriptStore store = new FileStorageModule();
+            var script = new CSXScript<GlobalValues>(store);
+
+            var result = await script.Execute<int>("Scripts\\test1.csx", new GlobalValues(25, 75));
+
+            Assert.Equal(100, result);
+        }
     }
 }

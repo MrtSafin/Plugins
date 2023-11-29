@@ -13,10 +13,16 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Scripts
 {
-    public class CSXScript(ICSXScriptStore store, Type? globalValuesType)
+    public class CSXScript(ICSXScriptStore store, ICSXBuilderOptions? builderOptions = null, Type? globalValuesType = null)
     {
         protected readonly ICSXScriptStore _store = store;
         protected readonly Type? _globalValuesType = globalValuesType;
+        protected readonly ICSXBuilderOptions? _builderOptions = builderOptions;
+
+        public CSXScript(ICSXScriptStore store): this(store, null, null) { }
+        public CSXScript(ICSXScriptStore store, ICSXBuilderOptions builderOptions): this(store, builderOptions: builderOptions, globalValuesType: null) { }
+        public CSXScript(ICSXScriptStore store, Type globalValuesType) : this(store, builderOptions: null, globalValuesType: globalValuesType) { }
+
         public async Task<object> Execute(string name, object? globalValues)
         {
             var options = BuildOptions();
@@ -35,17 +41,23 @@ namespace Safin.Plugins.Scripts
                     compileResult);
             }
         }
-        protected virtual ScriptOptions BuildOptions() => ScriptOptions.Default
+        protected virtual ScriptOptions BuildOptions()
+        {
+            var result = ScriptOptions.Default
                         .AddImports("System", "System.IO", "System.Collections.Generic",
                             "System.Console", "System.Diagnostics", "System.Dynamic",
                             "System.Linq", "System.Text",
                             "System.Threading.Tasks")
                         .AddReferences("System", "System.Core"); //.AddReferences(currentAssembly)
+            result = _builderOptions?.BuildOptions(result) ?? result;
+            
+            return result;
+        }
         // var script = CSharpScript.Create("", options, globalsType: _globalValuesType);
         // script = script.ContinueWith("", options);
-        protected virtual async Task<Script<object>> CreateScript(string name, ScriptOptions options)
+        protected virtual async Task<Script> CreateScript(string name, ScriptOptions options)
         {
-            Script<object>? script = null;
+            Script? script = null;
             await _store.LoadAsync(name, stream =>
             {
                 if (script == null)
@@ -65,6 +77,59 @@ namespace Safin.Plugins.Scripts
                 else
                 {
                     script = script.ContinueWith(code, options);
+                }
+            });
+            if (script == null)
+                throw new ScriptNotFoundException($"Скрипт {name} не найден");
+
+            return script;
+        }
+    }
+    public class CSXScript<GlobalValuesType>(ICSXScriptStore store, ICSXBuilderOptions? builderOptions = null) : CSXScript(store, builderOptions, typeof(GlobalValuesType))
+        where GlobalValuesType: class
+    {
+        public CSXScript(ICSXScriptStore store) : this(store, null) { }
+        public async Task<TResult> Execute<TResult>(string name, GlobalValuesType globalValues)
+        {
+            var options = BuildOptions();
+            var script = await CreateScript<TResult>(name, options);
+
+            var compileResult = script.Compile();
+            if (compileResult.Length == 0)
+            {
+                var runResult = await script.RunAsync(globals: globalValues);
+                return runResult.ReturnValue;
+            }
+            else
+            {
+                throw new CompilationErrorException(
+                    compileResult.Aggregate((string?)null,
+                        (result, value) => string.IsNullOrEmpty(result) ? value.GetMessage() : result + Environment.NewLine + value.GetMessage()),
+                    compileResult);
+            }
+        }
+        protected virtual async Task<Script<TResult>> CreateScript<TResult>(string name, ScriptOptions options)
+        {
+            Script<TResult>? script = null;
+            await _store.LoadAsync(name, stream =>
+            {
+                if (script == null)
+                {
+                    script = CSharpScript.Create<TResult>(stream, options, globalsType: _globalValuesType);
+                }
+                else
+                {
+                    script = script.ContinueWith<TResult>(stream, options);
+                }
+            }, code =>
+            {
+                if (script == null)
+                {
+                    script = CSharpScript.Create<TResult>(code, options, globalsType: _globalValuesType);
+                }
+                else
+                {
+                    script = script.ContinueWith<TResult>(code, options);
                 }
             });
             if (script == null)
