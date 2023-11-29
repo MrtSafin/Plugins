@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Safin.Plugins.Stores;
+
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -8,10 +10,11 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class AssemblyModuleUnloadable: AssemblyModuleBase
+    public class AssemblyModuleUnloadable(IAssemblyModuleStore store) : AssemblyModuleBase(store)
     {
         private readonly List<ModuleClassProxy> _proxies = [];
-        protected override AssemblyLoadContext CreateLoadContext(string path) => new ModuleLoadContext(path, true);
+
+        protected override AssemblyLoadContext CreateLoadContext(string name) => _store.CreateLoadContext(name, true); // new ModuleLoadContext(path)
         public bool Unload()
         {
             if (_loadContext is not null)

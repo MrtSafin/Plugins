@@ -7,7 +7,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestLibrary", "TestLibrary\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules", "..\src\Safin.Plugins.Modules\Safin.Plugins.Modules.csproj", "{699C7229-A2F8-430D-8C46-39A45B3BA279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins.Modules.Tests", "Safin.Plugins.Modules.Tests\Safin.Plugins.Modules.Tests.csproj", "{AECFC47E-B4E3-457B-8683-891161DC373B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules.Tests", "Safin.Plugins.Modules.Tests\Safin.Plugins.Modules.Tests.csproj", "{AECFC47E-B4E3-457B-8683-891161DC373B}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Abstractions", "..\src\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj", "{38F43296-5539-4F7A-ADD9-8E642722E697}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Stores.FileStorage", "..\src\Safin.Plugins.Stores.FileStorage\Safin.Plugins.Stores.FileStorage.csproj", "{237FE68D-AD0D-45DC-8B80-CD723387B785}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +31,14 @@ Global
 		{AECFC47E-B4E3-457B-8683-891161DC373B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AECFC47E-B4E3-457B-8683-891161DC373B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AECFC47E-B4E3-457B-8683-891161DC373B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{38F43296-5539-4F7A-ADD9-8E642722E697}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{38F43296-5539-4F7A-ADD9-8E642722E697}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{38F43296-5539-4F7A-ADD9-8E642722E697}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{38F43296-5539-4F7A-ADD9-8E642722E697}.Release|Any CPU.Build.0 = Release|Any CPU
+		{237FE68D-AD0D-45DC-8B80-CD723387B785}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{237FE68D-AD0D-45DC-8B80-CD723387B785}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{237FE68D-AD0D-45DC-8B80-CD723387B785}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{237FE68D-AD0D-45DC-8B80-CD723387B785}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

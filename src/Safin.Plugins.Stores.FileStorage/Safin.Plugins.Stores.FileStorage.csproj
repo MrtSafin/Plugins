@@ -7,4 +7,8 @@
     <RootNamespace>Safin.Plugins.Stores</RootNamespace>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
