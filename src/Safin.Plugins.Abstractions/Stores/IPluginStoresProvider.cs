@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Stores
 {
-    public interface ICSXScriptStore
+    public interface IPluginStoresProvider
     {
-        Task LoadAsync(string name, Func<Stream, Task> loadFromStream, Func<string, Task> loadFromString);
+        Task LoadPlugins();
     }
 }

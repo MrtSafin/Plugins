@@ -10,7 +10,7 @@ namespace Safin.Plugins.Modules.Tests
         {
             var currentDir = Directory.GetCurrentDirectory();
             var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModule(new FileStorageModule());
+            var module = new AssemblyModule(new PluginFileStore());
             module.Load(path);
         }
         [Fact]
@@ -18,7 +18,7 @@ namespace Safin.Plugins.Modules.Tests
         {
             var currentDir = Directory.GetCurrentDirectory();
             var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new FileStorageModule());
+            var module = new AssemblyModuleUnloadable(new PluginFileStore());
             module.Load(path);
 
             Assert.True(module.Unload());
@@ -28,7 +28,7 @@ namespace Safin.Plugins.Modules.Tests
         {
             var currentDir = Directory.GetCurrentDirectory();
             var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new FileStorageModule());
+            var module = new AssemblyModuleUnloadable(new PluginFileStore());
             module.Load(path);
 
             var proxy = module.CreateInstance(assembly =>
@@ -45,7 +45,7 @@ namespace Safin.Plugins.Modules.Tests
         {
             var currentDir = Directory.GetCurrentDirectory();
             var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new FileStorageModule());
+            var module = new AssemblyModuleUnloadable(new PluginFileStore());
             module.Load(path);
 
             var proxy = module.CreateInstance(assembly =>
@@ -65,7 +65,7 @@ namespace Safin.Plugins.Modules.Tests
         {
             var currentDir = Directory.GetCurrentDirectory();
             var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new FileStorageModule());
+            var module = new AssemblyModuleUnloadable(new PluginFileStore());
             module.Load(path);
 
             var proxy = module.CreateInstance(assembly =>

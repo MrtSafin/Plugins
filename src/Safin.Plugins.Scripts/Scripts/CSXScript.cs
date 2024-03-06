@@ -68,6 +68,7 @@ namespace Safin.Plugins.Scripts
                 {
                     script = script.ContinueWith(stream, options);
                 }
+                return Task.CompletedTask;
             }, code =>
             {
                 if (script == null)
@@ -78,6 +79,7 @@ namespace Safin.Plugins.Scripts
                 {
                     script = script.ContinueWith(code, options);
                 }
+                return Task.CompletedTask;
             });
             if (script == null)
                 throw new ScriptNotFoundException($"Скрипт {name} не найден");
@@ -121,6 +123,7 @@ namespace Safin.Plugins.Scripts
                 {
                     script = script.ContinueWith<TResult>(stream, options);
                 }
+                return Task.CompletedTask;
             }, code =>
             {
                 if (script == null)
@@ -131,6 +134,7 @@ namespace Safin.Plugins.Scripts
                 {
                     script = script.ContinueWith<TResult>(code, options);
                 }
+                return Task.CompletedTask;
             });
             if (script == null)
                 throw new ScriptNotFoundException($"Скрипт {name} не найден");

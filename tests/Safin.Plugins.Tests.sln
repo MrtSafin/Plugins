@@ -11,7 +11,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules.Tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Abstractions", "..\src\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj", "{38F43296-5539-4F7A-ADD9-8E642722E697}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Stores.FileStorage", "..\src\Safin.Plugins.Stores.FileStorage\Safin.Plugins.Stores.FileStorage.csproj", "{237FE68D-AD0D-45DC-8B80-CD723387B785}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Stores.FileStores", "..\src\Safin.Plugins.Stores.FileStores\Safin.Plugins.Stores.FileStores.csproj", "{237FE68D-AD0D-45DC-8B80-CD723387B785}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Scripts", "..\src\Safin.Plugins.Scripts\Safin.Plugins.Scripts.csproj", "{3CA30DEC-C1BC-425F-BE0A-92B41990C716}"
 EndProject

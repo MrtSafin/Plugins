@@ -26,7 +26,7 @@
     <ProjectReference Include="..\..\src\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj" />
     <ProjectReference Include="..\..\src\Safin.Plugins.Modules\Safin.Plugins.Modules.csproj" />
     <ProjectReference Include="..\..\src\Safin.Plugins.Scripts\Safin.Plugins.Scripts.csproj" />
-    <ProjectReference Include="..\..\src\Safin.Plugins.Stores.FileStorage\Safin.Plugins.Stores.FileStorage.csproj" />
+    <ProjectReference Include="..\..\src\Safin.Plugins.Stores.FileStores\Safin.Plugins.Stores.FileStores.csproj" />
   </ItemGroup>
 
   <ItemGroup>

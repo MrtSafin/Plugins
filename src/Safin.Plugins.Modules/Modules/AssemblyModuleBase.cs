@@ -23,6 +23,8 @@ namespace Safin.Plugins.Modules
         protected Assembly? _assembly = null;
         protected IAssemblyModuleStore _store = store;
 
+        public bool IsLoaded => _assembly != null;
+
         public void Load(string name)
         {
             ArgumentException.ThrowIfNullOrEmpty(name, nameof(name));

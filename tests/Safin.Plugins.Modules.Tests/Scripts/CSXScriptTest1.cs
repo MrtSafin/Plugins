@@ -16,7 +16,7 @@ namespace Safin.Plugins.Modules.Tests.Scripts
         [Fact]
         public async Task ExecuteFileTest1()
         {
-            ICSXScriptStore store = new FileStorageModule();
+            ICSXScriptStore store = new PluginFileStore();
             var script = new CSXScript(store, typeof(GlobalValues));
 
             var result = await script.Execute("Scripts\\test1.csx", new GlobalValues(25, 75));
@@ -27,7 +27,7 @@ namespace Safin.Plugins.Modules.Tests.Scripts
         [Fact]
         public async Task ExecuteFileTest2()
         {
-            ICSXScriptStore store = new FileStorageModule();
+            ICSXScriptStore store = new PluginFileStore();
             var script = new CSXScript<GlobalValues>(store);
 
             var result = await script.Execute<int>("Scripts\\test1.csx", new GlobalValues(25, 75));

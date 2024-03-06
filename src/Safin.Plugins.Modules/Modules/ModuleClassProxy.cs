@@ -28,7 +28,7 @@ namespace Safin.Plugins.Modules
 
             action(_instance);
         }
-        public TResult? CallFunc<TResult>(Func<object, TResult?> func)
+        public TResult CallFunc<TResult>(Func<object, TResult> func)
         {
             if (_instance == null)
             {
@@ -133,7 +133,7 @@ namespace Safin.Plugins.Modules
             action(_instance);
         }
 
-        public TResult? CallFunc<TResult>(Func<T, TResult?> func)
+        public TResult CallFunc<TResult>(Func<T, TResult> func)
         {
             if (_instance == null)
             {
