@@ -11,8 +11,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Abstractions"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Stores.FileStores", "Safin.Plugins.Stores.FileStores\Safin.Plugins.Stores.FileStores.csproj", "{1349C93C-E22C-4F81-9FB9-935E736D1148}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Safin.Plugins", "Safin.Plugins\Safin.Plugins.csproj", "{8E616822-A117-414A-843C-1B2AB7255D02}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -35,10 +33,6 @@ Global
 		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1349C93C-E22C-4F81-9FB9-935E736D1148}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8E616822-A117-414A-843C-1B2AB7255D02}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8E616822-A117-414A-843C-1B2AB7255D02}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8E616822-A117-414A-843C-1B2AB7255D02}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8E616822-A117-414A-843C-1B2AB7255D02}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

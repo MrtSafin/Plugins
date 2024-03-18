@@ -35,7 +35,7 @@ namespace Safin.Plugins.Modules
             }
 
             _loadContext = CreateLoadContext(name);
-            _assembly = _loadContext.LoadFromAssemblyName(_store.GetAssemblyName(name)); //new AssemblyName(Path.GetFileNameWithoutExtension(path)
+            _assembly = _loadContext.LoadFromAssemblyName(_store.CreateAssemblyName(name)); //new AssemblyName(Path.GetFileNameWithoutExtension(path)
         }
         protected abstract AssemblyLoadContext CreateLoadContext(string path);
     }

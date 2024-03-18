@@ -10,16 +10,18 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules.Tests.Scripts
 {
-    public record GlobalValues(int X, int Y);
     public class CSXScriptTest1
     {
         [Fact]
         public async Task ExecuteFileTest1()
         {
             ICSXScriptStore store = new PluginFileStore();
-            var script = new CSXScript(store, typeof(GlobalValues));
+            var script = new CSXScript(store, typeof(CSXScriptPluginParams));
 
-            var result = await script.Execute("Scripts\\test1.csx", new GlobalValues(25, 75));
+            var result = await script.Execute("Scripts\\test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
+                { "X", 25 },
+                {"Y", 75 }
+            }));
 
             Assert.NotNull(result);
             Assert.Equal(100, (int)result);
@@ -28,9 +30,12 @@ namespace Safin.Plugins.Modules.Tests.Scripts
         public async Task ExecuteFileTest2()
         {
             ICSXScriptStore store = new PluginFileStore();
-            var script = new CSXScript<GlobalValues>(store);
+            var script = new CSXScript<CSXScriptPluginParams>(store);
 
-            var result = await script.Execute<int>("Scripts\\test1.csx", new GlobalValues(25, 75));
+            var result = await script.Execute<int>("Scripts\\test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
+                { "X", 25 },
+                {"Y", 75 }
+            }));
 
             Assert.Equal(100, result);
         }

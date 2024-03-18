@@ -13,21 +13,18 @@ namespace Safin.Plugins.Stores.FileStorage
 {
     public class PluginFileStore : IAssemblyModuleStore, ICSXScriptStore
     {
-        public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload)
-        {
-            return new ModuleLoadContext(name, AllowUnload);
-        }
+        public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload) => new ModuleLoadContext(name, AllowUnload);
 
-        public AssemblyName GetAssemblyName(string name)
-        {
-            return new AssemblyName(Path.GetFileNameWithoutExtension(name));
-        }
+        public AssemblyName CreateAssemblyName(string name) => new(Path.GetFileNameWithoutExtension(name));
 
-        public async Task LoadAsync(string name, Func<Stream, Task> loadFromStream, Func<string, Task> loadFromString)
+        public Task LoadAsync(string name, ICSXScriptBuilder loader)
         {
-            using var stream = new FileStream(name, FileMode.Open, FileAccess.Read);
-            await loadFromStream(stream);
-            stream.Close();
+            var stream = new FileStream(name, FileMode.Open, FileAccess.Read);
+            return loader.LoadFromStreamAsync(stream)
+                .ContinueWith(t =>
+                {
+                    stream.Dispose();
+                });
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.CodeAnalysis.CSharp.Scripting;
+﻿using Microsoft.CodeAnalysis;
+using Microsoft.CodeAnalysis.CSharp.Scripting;
 using Microsoft.CodeAnalysis.Scripting;
 
 using Safin.Plugins.Helpers;
@@ -57,34 +58,12 @@ namespace Safin.Plugins.Scripts
         // script = script.ContinueWith("", options);
         protected virtual async Task<Script> CreateScript(string name, ScriptOptions options)
         {
-            Script? script = null;
-            await _store.LoadAsync(name, stream =>
-            {
-                if (script == null)
-                {
-                    script = CSharpScript.Create(stream, options, globalsType: _globalValuesType);
-                }
-                else
-                {
-                    script = script.ContinueWith(stream, options);
-                }
-                return Task.CompletedTask;
-            }, code =>
-            {
-                if (script == null)
-                {
-                    script = CSharpScript.Create(code, options, globalsType: _globalValuesType);
-                }
-                else
-                {
-                    script = script.ContinueWith(code, options);
-                }
-                return Task.CompletedTask;
-            });
-            if (script == null)
+            CSXScriptLoader loader = new(_globalValuesType, options);
+            await _store.LoadAsync(name, loader);
+            if (loader.Script == null)
                 throw new ScriptNotFoundException($"Скрипт {name} не найден");
 
-            return script;
+            return loader.Script;
         }
     }
     public class CSXScript<GlobalValuesType>(ICSXScriptStore store, ICSXBuilderOptions? builderOptions = null) : CSXScript(store, builderOptions, typeof(GlobalValuesType))
@@ -112,34 +91,70 @@ namespace Safin.Plugins.Scripts
         }
         protected virtual async Task<Script<TResult>> CreateScript<TResult>(string name, ScriptOptions options)
         {
-            Script<TResult>? script = null;
-            await _store.LoadAsync(name, stream =>
-            {
-                if (script == null)
-                {
-                    script = CSharpScript.Create<TResult>(stream, options, globalsType: _globalValuesType);
-                }
-                else
-                {
-                    script = script.ContinueWith<TResult>(stream, options);
-                }
-                return Task.CompletedTask;
-            }, code =>
-            {
-                if (script == null)
-                {
-                    script = CSharpScript.Create<TResult>(code, options, globalsType: _globalValuesType);
-                }
-                else
-                {
-                    script = script.ContinueWith<TResult>(code, options);
-                }
-                return Task.CompletedTask;
-            });
-            if (script == null)
+            CSXScriptLoader<TResult> loader = new(_globalValuesType, options);
+            await _store.LoadAsync(name, loader);
+            if (loader.Script == null)
                 throw new ScriptNotFoundException($"Скрипт {name} не найден");
 
-            return script;
+            return loader.Script;
+        }
+    }
+    public class CSXScriptLoader<TResult>(Type? globalValuesType, ScriptOptions options) : ICSXScriptBuilder
+    {
+        public Script<TResult>? Script { get; private set; } = null;
+        public Task LoadFromStreamAsync(Stream stream)
+        {
+            if (Script == null)
+            {
+                Script = CSharpScript.Create<TResult>(stream, options, globalsType: globalValuesType);
+            }
+            else
+            {
+                Script = Script.ContinueWith<TResult>(stream, options);
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task LoadFromStringAsync(string code)
+        {
+            if (Script == null)
+            {
+                Script = CSharpScript.Create<TResult>(code, options, globalsType: globalValuesType);
+            }
+            else
+            {
+                Script = Script.ContinueWith<TResult>(code, options);
+            }
+            return Task.CompletedTask;
+        }
+    }
+    public class CSXScriptLoader(Type? globalValuesType, ScriptOptions options) : ICSXScriptBuilder
+    {
+        public Script? Script { get; private set; } = null;
+        public Task LoadFromStreamAsync(Stream stream)
+        {
+            if (Script == null)
+            {
+                Script = CSharpScript.Create(stream, options, globalsType: globalValuesType);
+            }
+            else
+            {
+                Script = Script.ContinueWith(stream, options);
+            }
+            return Task.CompletedTask;
+        }
+
+        public Task LoadFromStringAsync(string code)
+        {
+            if (Script == null)
+            {
+                Script = CSharpScript.Create(code, options, globalsType: globalValuesType);
+            }
+            else
+            {
+                Script = Script.ContinueWith(code, options);
+            }
+            return Task.CompletedTask;
         }
     }
 }

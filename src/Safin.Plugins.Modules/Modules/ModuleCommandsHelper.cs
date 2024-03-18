@@ -25,7 +25,7 @@ namespace Safin.Plugins.Modules
             var property = type.GetProperty(paramName, BindingFlags.Instance | BindingFlags.Public);
             property?.SetValue(instance, value);
         }
-        public static Task ExecuteAsync(Type type, object instance)
+        public static Task<object?> ExecuteAsync(Type type, object instance)
         {
             var method = type.GetMethod("ExecuteAsync", BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes);
             if (method != null)
@@ -34,7 +34,7 @@ namespace Safin.Plugins.Modules
                 {
                     throw new CommandException("Method \"ExecuteAsync\" declaration error. \"public Task ExecuteAsync()\"");
                 }
-                var task = (Task)method.Invoke(instance, [])!;
+                var task = (Task<object?>)method.Invoke(instance, [])!;
                 return task;
             }
             else

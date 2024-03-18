@@ -8,9 +8,12 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Stores
 {
+    /// <summary>
+    /// Хранилище отвечающее за откомпилированные модули.
+    /// </summary>
     public interface IAssemblyModuleStore
     {
         AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload);
-        AssemblyName GetAssemblyName(string name);
+        AssemblyName CreateAssemblyName(string name);
     }
 }

@@ -11,15 +11,15 @@ namespace Safin.Plugins.Modules
 {
     public abstract class ModuleCommandsBase()
     {
-        protected Dictionary<string, ModuleCommandBuilder> _commands = [];
+        protected Dictionary<string, IModuleCommandBuilder> _commands = [];
         public void Register(string name, string className)
         {
             _commands.Add(name, CreateCommandBuilder(className));
         }
-        protected abstract ModuleCommandBuilder CreateCommandBuilder(string className);
+        public abstract IModuleCommandBuilder CreateCommandBuilder(string className);
     }
-    public abstract class ModuleCommandBuilder
+    public interface IModuleCommandBuilder
     {
-        public abstract ICommand BuildCommand();
+        ICommand BuildCommand();
     }
 }

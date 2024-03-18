@@ -10,19 +10,19 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class ModuleCommandsUnloadable(AssemblyModuleUnloadable assemblyModule) : ModuleCommandsBase, IModuleCommands
+    public class ModuleCommandsUnloadable(AssemblyModuleUnloadable assemblyModule) : ModuleCommandsBase, IAssemblyCommands
     {
         private readonly AssemblyModuleUnloadable _assemblyModule = assemblyModule;
-        protected override ModuleCommandBuilder CreateCommandBuilder(string className)
+        public override IModuleCommandBuilder CreateCommandBuilder(string className)
         {
             return new ModuleCommandBuilderUnloadable(_assemblyModule, className);
         }
-        private class ModuleCommandBuilderUnloadable(AssemblyModuleUnloadable assemblyModule, string className): ModuleCommandBuilder
+        private class ModuleCommandBuilderUnloadable(AssemblyModuleUnloadable assemblyModule, string className): IModuleCommandBuilder
         {
             private readonly AssemblyModuleUnloadable _assemblyModule = assemblyModule;
             private readonly string _className = className;
 
-            public override ICommand BuildCommand()
+            public ICommand BuildCommand()
             {
                 return new ModuleCommand(_assemblyModule.CreateInstance(assembly =>
                 {
@@ -34,10 +34,20 @@ namespace Safin.Plugins.Modules
         private class ModuleCommand(IProxy proxy): ICommand
         {
             private readonly IProxy _proxy = proxy;
+            private object? _result = null;
+            public object? Result => _result;
 
             public Task ExecuteAsync()
             {
-                return _proxy.CallFunc(instance => ModuleCommandsHelper.ExecuteAsync(instance.GetType(), instance));
+                return _proxy
+                    .CallFunc(instance => ModuleCommandsHelper.ExecuteAsync(instance.GetType(), instance))
+                    .ContinueWith(t =>
+                    {
+                        if (!t.IsFaulted)
+                        {
+                            _result = t.Result;
+                        }
+                    });
             }
 
             public void SetProperty(string paramName, object value)

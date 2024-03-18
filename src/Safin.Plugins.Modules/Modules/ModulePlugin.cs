@@ -1,4 +1,5 @@
-﻿using Safin.Plugins.Exceptions;
+﻿using Safin.Plugins.Commands;
+using Safin.Plugins.Exceptions;
 using Safin.Plugins.Stores;
 
 using System;
@@ -10,16 +11,16 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class ModuleProvider(IAssemblyModuleStore store, ModuleProviderOptions options): IPluginProvider
+    public class ModulePlugin(IAssemblyModuleStore store, ModuleProviderOptions options): IPlugin
     {
         private readonly IAssemblyModuleStore _store = store;
         private readonly ModuleProviderOptions _options = options;
         private AssemblyModuleBase? _module = null;
-        private IModuleCommands? _moduleCommands = null;
+        private IAssemblyCommands? _moduleCommands = null;
         
         public bool IsLoaded => _module != null && _module.IsLoaded;
 
-        public void Load(Action<Assembly, IModuleCommands> initialize)
+        public Task LoadAsync()
         {
             if (_module != null)
             {
@@ -40,7 +41,7 @@ namespace Safin.Plugins.Modules
                 module.Load(_options.Name);
                 try
                 {
-                    module.CallAction(assembly => initialize(assembly, _moduleCommands));
+                    module.CallAction(assembly => AssemblyInitialize(assembly, _moduleCommands));
                 }
                 catch
                 {
@@ -59,7 +60,7 @@ namespace Safin.Plugins.Modules
                     module.Load(_options.Name);
                     _moduleCommands = new ModuleCommands(module.Assembly!);
 
-                    initialize(module.Assembly!, _moduleCommands);
+                    AssemblyInitialize(module.Assembly!, _moduleCommands);
                 }
                 catch
                 {
@@ -68,6 +69,11 @@ namespace Safin.Plugins.Modules
                 }
                 _module = module;
             }
+            return Task.CompletedTask;
+        }
+        private void AssemblyInitialize(Assembly assembly, IModuleCommands moduleCommands)
+        {
+
         }
         public void Unload()
         {
@@ -85,6 +91,17 @@ namespace Safin.Plugins.Modules
             {
                 throw new PluginUnloadException("Модуль не можут быть выгружен. Проверьте возможно остались ссылки на объекты в модуле.");
             }
+        }
+
+        public Task<ICommand> CreateCommandAsync(string commandName)
+        {
+            if (_moduleCommands == null)
+            {
+                throw new PluginLoadException("Модуль не загружен.");
+            }
+            
+            var builder = _moduleCommands.CreateCommandBuilder(commandName);
+            return Task.FromResult(builder.BuildCommand());
         }
     }
 }

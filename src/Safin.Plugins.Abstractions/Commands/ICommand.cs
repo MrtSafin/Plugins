@@ -10,5 +10,6 @@ namespace Safin.Plugins.Commands
     {
         void SetProperty(string paramName, object value);
         Task ExecuteAsync();
+        object? Result { get; }
     }
 }
