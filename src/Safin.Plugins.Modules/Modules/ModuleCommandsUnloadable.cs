@@ -1,5 +1,4 @@
-﻿using Safin.Plugins.Commands;
-using Safin.Plugins.Exceptions;
+﻿using Safin.Plugins.Exceptions;
 
 using System;
 using System.Collections.Generic;
@@ -34,19 +33,21 @@ namespace Safin.Plugins.Modules
         private class ModuleCommand(IProxy proxy): ICommand
         {
             private readonly IProxy _proxy = proxy;
-            private object? _result = null;
-            public object? Result => _result;
+            public object? Result
+            {
+                get
+                {
+                    return _proxy
+                        .CallFunc(instance => ModuleCommandsHelper.GetResult(instance.GetType(), instance));
+                }
+            }
 
             public Task ExecuteAsync()
             {
                 return _proxy
-                    .CallFunc(instance => ModuleCommandsHelper.ExecuteAsync(instance.GetType(), instance))
-                    .ContinueWith(t =>
+                    .CallFunc(instance =>
                     {
-                        if (!t.IsFaulted)
-                        {
-                            _result = t.Result;
-                        }
+                        return ModuleCommandsHelper.ExecuteAsync(instance.GetType(), instance);
                     });
             }
 

@@ -1,7 +1,7 @@
 using Safin.Plugins.Modules;
 using Safin.Plugins.Stores.FileStorage;
 
-namespace Safin.Plugins.Modules.Tests
+namespace Safin.Plugins.Tests.Assembly
 {
     public class AssemblyModuleTest1
     {

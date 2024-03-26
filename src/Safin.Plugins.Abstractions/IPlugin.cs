@@ -1,5 +1,4 @@
-﻿using Safin.Plugins.Commands;
-using Safin.Plugins.Modules;
+﻿using Safin.Plugins.Modules;
 
 using System;
 using System.Collections.Generic;
@@ -10,6 +9,9 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins
 {
+    /// <summary>
+    /// Работа с одним плагином
+    /// </summary>
     public interface IPlugin
     {
         /// <summary>

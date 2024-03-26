@@ -1,5 +1,4 @@
-﻿using Safin.Plugins.Commands;
-using Safin.Plugins.Exceptions;
+﻿using Safin.Plugins.Exceptions;
 
 using System;
 using System.Collections.Generic;
@@ -26,23 +25,16 @@ namespace Safin.Plugins.Modules
                 return new AssemblyCommand(Activator.CreateInstance(_type)!);
             }
         }
-        private class AssemblyCommand(object instance): ICommand
+        private class AssemblyCommand(object instance) : ICommand
         {
             private readonly object _instance = instance;
             private readonly Type _type = instance.GetType();
-            private object? _result = null;
-            public object? Result => _result;
+            public object? Result => ModuleCommandsHelper.GetResult(_type, _instance);
 
             public void SetProperty(string paramName, object value) => ModuleCommandsHelper.SetProperty(_type, _instance, paramName, value);
-            public Task ExecuteAsync() => 
-                ModuleCommandsHelper.ExecuteAsync(_type, _instance)
-                    .ContinueWith(t =>
-                    {
-                        if (!t.IsFaulted)
-                        {
-                            _result = t.Result;
-                        }
-                    });
+            public Task ExecuteAsync() {
+                return ModuleCommandsHelper.ExecuteAsync(_type, _instance);
+            }
         }
     }
 }

@@ -1,5 +1,4 @@
-﻿using Safin.Plugins.Commands;
-using Safin.Plugins.Modules;
+﻿using Safin.Plugins.Modules;
 using Safin.Plugins.Stores;
 
 using System;
@@ -67,6 +66,9 @@ namespace Safin.Plugins.Scripts
                     if (!t.IsFaulted)
                     {
                         _result = t.Result;
+                    } else
+                    {
+                        throw t.Exception.InnerException!;
                     }
                 });
         }

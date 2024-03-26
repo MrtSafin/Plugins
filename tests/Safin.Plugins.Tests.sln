@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestLibrary", "TestLibrary\
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules", "..\src\Safin.Plugins.Modules\Safin.Plugins.Modules.csproj", "{699C7229-A2F8-430D-8C46-39A45B3BA279}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Modules.Tests", "Safin.Plugins.Modules.Tests\Safin.Plugins.Modules.Tests.csproj", "{AECFC47E-B4E3-457B-8683-891161DC373B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Tests", "Safin.Plugins.Tests\Safin.Plugins.Tests.csproj", "{AECFC47E-B4E3-457B-8683-891161DC373B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Safin.Plugins.Abstractions", "..\src\Safin.Plugins.Abstractions\Safin.Plugins.Abstractions.csproj", "{38F43296-5539-4F7A-ADD9-8E642722E697}"
 EndProject

@@ -1,5 +1,4 @@
-﻿using Safin.Plugins.Commands;
-using Safin.Plugins.Exceptions;
+﻿using Safin.Plugins.Exceptions;
 using Safin.Plugins.Stores;
 
 using System;
@@ -11,10 +10,10 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class ModulePlugin(IAssemblyModuleStore store, ModuleProviderOptions options): IPlugin
+    public class ModulePlugin(IAssemblyModuleStore store, ModulePluginOptions options): IPlugin
     {
         private readonly IAssemblyModuleStore _store = store;
-        private readonly ModuleProviderOptions _options = options;
+        private readonly ModulePluginOptions _options = options;
         private AssemblyModuleBase? _module = null;
         private IAssemblyCommands? _moduleCommands = null;
         
@@ -26,13 +25,6 @@ namespace Safin.Plugins.Modules
             {
                 throw new PluginLoadException($"Модуль \"{_options.Name}\" уже загружен.");
             }
-
-            _moduleCommands = _module switch
-            {
-                AssemblyModule assemblyModule => new ModuleCommands(assemblyModule.Assembly!),
-                AssemblyModuleUnloadable moduleUnloadable => new ModuleCommandsUnloadable(moduleUnloadable),
-                _ => throw new InvalidOperationException("Данный тип модуля не потдерживаеться")
-            };
 
             if (_options.IsUnloadable)
             {
@@ -69,6 +61,7 @@ namespace Safin.Plugins.Modules
                 }
                 _module = module;
             }
+
             return Task.CompletedTask;
         }
         private void AssemblyInitialize(Assembly assembly, IModuleCommands moduleCommands)

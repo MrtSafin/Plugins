@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class ModuleProviderOptions(string name)
+    public class ModulePluginOptions(string name)
     {
         public string Name { get; set; } = name;
         public bool IsUnloadable { get; set; } = true;

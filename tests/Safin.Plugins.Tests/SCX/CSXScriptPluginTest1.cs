@@ -7,8 +7,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.CodeAnalysis.Scripting;
 
-namespace Safin.Plugins.Modules.Tests.Scripts
+namespace Safin.Plugins.Tests.SCX
 {
     public class CSXScriptPluginTest1
     {
@@ -22,7 +23,7 @@ namespace Safin.Plugins.Modules.Tests.Scripts
                 Name = "Test1",
                 Commands =
                 [
-                    new CSXCommandInfo { CommandName = "test", FileName = "Scripts\\test1.csx" }
+                    new CSXCommandInfo { CommandName = "test", FileName = "SCX\\test1.csx" }
                 ]
             };
             var script = new CSXScriptPlugin(store, options);
@@ -33,6 +34,28 @@ namespace Safin.Plugins.Modules.Tests.Scripts
             await command.ExecuteAsync();
             Assert.NotNull(command.Result);
             Assert.Equal(100, (int)command.Result);
+        }
+        [Fact]
+        public async Task Test2()
+        {
+            ICSXScriptStore store = new PluginFileStore();
+            CSXScriptPluginOptions options = new()
+            {
+                Name = "Test1",
+                Commands =
+                [
+                    new CSXCommandInfo { CommandName = "test", FileName = "SCX\\test2.csx" }
+                ]
+            };
+            var script = new CSXScriptPlugin(store, options);
+            await script.LoadAsync();
+            var command = await script.CreateCommandAsync("test");
+            command.SetProperty("X", 25);
+            command.SetProperty("Y", 75);
+            var error = await Assert.ThrowsAsync<CompilationErrorException>(async () =>
+            {
+                await command.ExecuteAsync();
+            });
         }
     }
 }
