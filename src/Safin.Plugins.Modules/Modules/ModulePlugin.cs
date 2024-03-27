@@ -10,14 +10,28 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Modules
 {
-    public class ModulePlugin(IAssemblyModuleStore store, ModulePluginOptions options): IPlugin
+    public class ModulePlugin(IAssemblyModuleStore store, ModulePluginOptions options, Action<Assembly, IModuleCommands>? assemblyStartup = null) : DisposableBase, IPlugin
     {
         private readonly IAssemblyModuleStore _store = store;
         private readonly ModulePluginOptions _options = options;
+        private readonly Action<Assembly, IModuleCommands>? _assemblyStartup = assemblyStartup;
         private AssemblyModuleBase? _module = null;
         private IAssemblyCommands? _moduleCommands = null;
         
         public bool IsLoaded => _module != null && _module.IsLoaded;
+        protected override void DisposeManaged()
+        {
+            base.DisposeManaged();
+
+            if (_module != null) {
+                if (_options.IsUnloadable)
+                {
+                    var module = (AssemblyModuleUnloadable)_module;
+                    module.Unload();
+                }
+                _module = null;
+            }
+        }
 
         public Task LoadAsync()
         {
@@ -66,7 +80,7 @@ namespace Safin.Plugins.Modules
         }
         private void AssemblyInitialize(Assembly assembly, IModuleCommands moduleCommands)
         {
-
+            _assemblyStartup?.Invoke(assembly, moduleCommands);
         }
         public void Unload()
         {

@@ -1,4 +1,4 @@
-﻿namespace TestLibrary
+﻿namespace Commands
 {
     public class TestClass
     {

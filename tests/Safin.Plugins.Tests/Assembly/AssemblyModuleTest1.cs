@@ -33,7 +33,7 @@ namespace Safin.Plugins.Tests.Assembly
 
             var proxy = module.CreateInstance(assembly =>
             {
-                var result = assembly.CreateInstance("TestLibrary.TestClass");
+                var result = assembly.CreateInstance("Commands.TestClass");
                 Assert.NotNull(result);
                 return result;
             });
@@ -50,7 +50,7 @@ namespace Safin.Plugins.Tests.Assembly
 
             var proxy = module.CreateInstance(assembly =>
             {
-                Type type = assembly.GetType("TestLibrary.TestClass", true)!;
+                Type type = assembly.GetType("Commands.TestClass", true)!;
                 var result = Activator.CreateInstance(type, [5]);
                 Assert.NotNull(result);
                 return result;
@@ -70,7 +70,7 @@ namespace Safin.Plugins.Tests.Assembly
 
             var proxy = module.CreateInstance(assembly =>
             {
-                Type type = assembly.GetType("TestLibrary.TestClass", true)!;
+                Type type = assembly.GetType("Commands.TestClass", true)!;
                 var result = Activator.CreateInstance(type, [5]);
                 Assert.NotNull(result);
                 return result;

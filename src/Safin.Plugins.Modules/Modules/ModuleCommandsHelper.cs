@@ -34,12 +34,33 @@ namespace Safin.Plugins.Modules
                 {
                     throw new CommandException("Method \"ExecuteAsync\" declaration error. \"public Task ExecuteAsync()\"");
                 }
-                var task = (Task)method.Invoke(instance, [])!;
-                return task;
+                try
+                {
+                    var result = method.Invoke(instance, []);
+                    return result == null ? Task.CompletedTask : (Task)result;
+                }
+                catch (TargetInvocationException ex)
+                {
+                    throw ex.InnerException!;
+                }
             }
             else
             {
-                throw new CommandException("Method \"ExecuteAsync\" not found");
+                method = type.GetMethod("Execute", BindingFlags.Instance | BindingFlags.Public, Type.EmptyTypes);
+
+                if (method != null)
+                {
+                    if (method.ReturnType != typeof(void))
+                    {
+                        throw new CommandException("Method \"Execute\" declaration error. \"public void Execute()\"");
+                    }
+                    method.Invoke(instance, []);
+                    return Task.CompletedTask;
+                }
+                else
+                {
+                    throw new CommandException("Method \"ExecuteAsync\" not found");
+                }
             }
         }
         public static object? GetResult(Type type, object instance)
