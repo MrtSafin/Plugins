@@ -30,6 +30,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Plugins\subfile.csx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Plugins\test-multifile.csx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Plugins\test2.csx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

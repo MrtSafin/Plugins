@@ -24,26 +24,24 @@ namespace Safin.Plugins.Stores.FileStorage
         }
         public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload)
         {
-            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
+            var fileName = GetFileName(name);
             return new ModuleLoadContext(fileName, AllowUnload);
         }
 
         public AssemblyName CreateAssemblyName(string name)
         {
-            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
+            var fileName = GetFileName(name);
             return new(Path.GetFileNameWithoutExtension(fileName));
         }
 
         public Task LoadAsync(string name, ICSXScriptBuilder loader)
         {
-            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
-
-            var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
-            return loader.LoadFromStreamAsync(stream)
-                .ContinueWith(t =>
-                {
-                    stream.Dispose();
-                });
+            var fileName = GetFileName(name);
+            return loader.LoadFromFileAsync(fileName, GetFileName);
+        }
+        public virtual string GetFileName(string name)
+        {
+            return Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
         }
     }
 }
