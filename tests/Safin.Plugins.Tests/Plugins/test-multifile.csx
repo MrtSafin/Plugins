@@ -1,3 +1,4 @@
 #load "subfile.csx"
+#r "C:\Projects\safin-biz\Plugins\tests\FunctionalityCheck\TestLibrary.dll"
 
-return add((int)Values["X"], (int)Values["Y"]);
+return add(ValueInt("X"), ValueInt("Y"));

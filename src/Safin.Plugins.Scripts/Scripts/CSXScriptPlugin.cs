@@ -79,5 +79,4 @@ namespace Safin.Plugins.Scripts
         }
     }
     internal record CSXScriptDetails(string FileName, CSXScript Script);
-    public record CSXScriptPluginParams(IDictionary<string, object> Values);
 }

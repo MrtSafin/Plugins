@@ -15,16 +15,16 @@ namespace Safin.Plugins.Stores
         /// Создаёт объект скрипта из потока.
         /// </summary>
         /// <param name="stream">Поток содержащий скрипт</param>
-        Task LoadFromStreamAsync(Stream stream, Func<string, Stream> resolve);
+        Task LoadFromStreamAsync(Stream stream, Func<string, Stream> sourceResolver, Func<string, string> referenceResolver);
         /// <summary>
         /// Создаёт объект скрипта из строки
         /// </summary>
         /// <param name="str">текст скрипта</param>
-        Task LoadFromStringAsync(string str, Func<string, string> resolve);
+        Task LoadFromStringAsync(string str, Func<string, string> sourceResolver, Func<string, string> referenceResolver);
         /// <summary>
         /// Создаёт объект скрипта из файла
         /// </summary>
         /// <param name="fileName">Имя файла</param>
-        Task LoadFromFileAsync(string fileName, Func<string, string> resolve);
+        Task LoadFromFileAsync(string fileName, Func<string, string> sourceResolver, Func<string, string> referenceResolver);
     }
 }

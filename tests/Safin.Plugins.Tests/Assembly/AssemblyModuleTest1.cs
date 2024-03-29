@@ -9,7 +9,7 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest1()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\Functionality—heck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var module = new AssemblyModule(new PluginFileStore(path));
             module.Load("TestLibrary.dll");
         }
@@ -17,7 +17,7 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest2()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\Functionality—heck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
             module.Load("TestLibrary.dll");
 
@@ -27,7 +27,7 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest3()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\Functionality—heck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
             module.Load("TestLibrary.dll");
 
@@ -44,7 +44,7 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest4()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\Functionality—heck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
             module.Load("TestLibrary.dll");
 
@@ -64,7 +64,7 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest5()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\Functionality—heck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
             module.Load("TestLibrary.dll");
 

@@ -37,7 +37,7 @@ namespace Safin.Plugins.Stores.FileStorage
         public Task LoadAsync(string name, ICSXScriptBuilder loader)
         {
             var fileName = GetFileName(name);
-            return loader.LoadFromFileAsync(fileName, GetFileName);
+            return loader.LoadFromFileAsync(fileName, GetFileName, GetFileName);
         }
         public virtual string GetFileName(string name)
         {

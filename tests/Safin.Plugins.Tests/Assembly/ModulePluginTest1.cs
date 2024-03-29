@@ -16,12 +16,14 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task LoadTest1()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var store = new PluginFileStore(path);
+#pragma warning disable CA1859 // Используйте конкретные типы, когда это возможно, для повышения производительности
             IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
                 IsUnloadable = false
             });
+#pragma warning restore CA1859 // Используйте конкретные типы, когда это возможно, для повышения производительности
 
             await plugin.LoadAsync();
             var command = await plugin.CreateCommandAsync("Commands.Test1");
@@ -36,7 +38,7 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task ExecuteTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var store = new PluginFileStore(path);
             IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
@@ -54,7 +56,7 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task BadTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var store = new PluginFileStore(path);
             IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
@@ -70,7 +72,7 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task BadExecuteTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityCheck"));
             var store = new PluginFileStore(path);
             IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
