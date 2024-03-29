@@ -1,1 +1,1 @@
-return (int)Values["X"] + (int)Values["Y"];
+﻿return (int)Values["X"] + (int)Values["Y"];

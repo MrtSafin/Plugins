@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Safin.Plugins.Scripts.Resolvers
 {
-    internal class ScriptFileSourceResolver(Func<string, string> resolver) : SourceReferenceResolver
+    internal sealed class ScriptFileSourceResolver(Func<string, string> resolver) : SourceReferenceResolver
     {
         public override string NormalizePath(string path, string? baseFilePath)
         {
