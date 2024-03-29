@@ -23,7 +23,7 @@ namespace Safin.Plugins.Tests.SCX
                 Name = "Test1",
                 Commands =
                 [
-                    new CSXCommandInfo { CommandName = "test", FileName = "SCX\\test1.csx" }
+                    new CSXCommandInfo { CommandName = "test", FileName = "test1.csx" }
                 ]
             };
             var script = new CSXScriptPlugin(store, options);
@@ -44,7 +44,7 @@ namespace Safin.Plugins.Tests.SCX
                 Name = "Test1",
                 Commands =
                 [
-                    new CSXCommandInfo { CommandName = "test", FileName = "SCX\\test2.csx" }
+                    new CSXCommandInfo { CommandName = "test", FileName = "test2.csx" }
                 ]
             };
             var script = new CSXScriptPlugin(store, options);
@@ -52,10 +52,7 @@ namespace Safin.Plugins.Tests.SCX
             var command = await script.CreateCommandAsync("test");
             command.SetProperty("X", 25);
             command.SetProperty("Y", 75);
-            var error = await Assert.ThrowsAsync<CompilationErrorException>(async () =>
-            {
-                await command.ExecuteAsync();
-            });
+            var error = await Assert.ThrowsAsync<CompilationErrorException>(command.ExecuteAsync);
         }
     }
 }

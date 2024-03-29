@@ -16,9 +16,9 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task LoadTest1()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck\\TestLibrary.dll"));
-            var store = new PluginFileStore();
-            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions(path)
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var store = new PluginFileStore(path);
+            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
                 IsUnloadable = false
             });
@@ -36,9 +36,9 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task ExecuteTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck\\TestLibrary.dll"));
-            var store = new PluginFileStore();
-            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions(path)
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var store = new PluginFileStore(path);
+            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
                 IsUnloadable = false
             });
@@ -54,9 +54,9 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task BadTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck\\TestLibrary.dll"));
-            var store = new PluginFileStore();
-            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions(path)
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var store = new PluginFileStore(path);
+            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
                 IsUnloadable = false
             });
@@ -70,9 +70,9 @@ namespace Safin.Plugins.Tests.Assembly
         public async Task BadExecuteTest()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck\\TestLibrary.dll"));
-            var store = new PluginFileStore();
-            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions(path)
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityСheck"));
+            var store = new PluginFileStore(path);
+            IPlugin plugin = new ModulePlugin(store, new ModulePluginOptions("TestLibrary.dll")
             {
                 IsUnloadable = false
             });

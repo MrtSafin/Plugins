@@ -13,13 +13,32 @@ namespace Safin.Plugins.Stores.FileStorage
 {
     public class PluginFileStore : IAssemblyModuleStore, ICSXScriptStore
     {
-        public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload) => new ModuleLoadContext(name, AllowUnload);
+        private readonly string _folder;
+        public PluginFileStore(string folder)
+        {
+            _folder = folder;
+        }
+        public PluginFileStore()
+        {
+            _folder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
+        }
+        public AssemblyLoadContext CreateLoadContext(string name, bool AllowUnload)
+        {
+            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
+            return new ModuleLoadContext(fileName, AllowUnload);
+        }
 
-        public AssemblyName CreateAssemblyName(string name) => new(Path.GetFileNameWithoutExtension(name));
+        public AssemblyName CreateAssemblyName(string name)
+        {
+            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
+            return new(Path.GetFileNameWithoutExtension(fileName));
+        }
 
         public Task LoadAsync(string name, ICSXScriptBuilder loader)
         {
-            var stream = new FileStream(name, FileMode.Open, FileAccess.Read);
+            var fileName = Path.IsPathFullyQualified(name) ? name : Path.Combine(_folder, name);
+
+            var stream = new FileStream(fileName, FileMode.Open, FileAccess.Read);
             return loader.LoadFromStreamAsync(stream)
                 .ContinueWith(t =>
                 {

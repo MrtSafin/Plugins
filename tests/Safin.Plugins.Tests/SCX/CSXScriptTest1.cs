@@ -18,7 +18,7 @@ namespace Safin.Plugins.Tests.SCX
             ICSXScriptStore store = new PluginFileStore();
             var script = new CSXScript(store, typeof(CSXScriptPluginParams));
 
-            var result = await script.Execute("SCX\\test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
+            var result = await script.Execute("test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
                 { "X", 25 },
                 {"Y", 75 }
             }));
@@ -32,7 +32,7 @@ namespace Safin.Plugins.Tests.SCX
             ICSXScriptStore store = new PluginFileStore();
             var script = new CSXScript<CSXScriptPluginParams>(store);
 
-            var result = await script.Execute<int>("SCX\\test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
+            var result = await script.Execute<int>("test1.csx", new CSXScriptPluginParams(new Dictionary<string, object> {
                 { "X", 25 },
                 {"Y", 75 }
             }));

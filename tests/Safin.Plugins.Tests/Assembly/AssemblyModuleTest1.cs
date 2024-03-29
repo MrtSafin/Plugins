@@ -9,17 +9,17 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest1()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModule(new PluginFileStore());
-            module.Load(path);
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck"));
+            var module = new AssemblyModule(new PluginFileStore(path));
+            module.Load("TestLibrary.dll");
         }
         [Fact]
         public void LoadTest2()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new PluginFileStore());
-            module.Load(path);
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck"));
+            var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
+            module.Load("TestLibrary.dll");
 
             Assert.True(module.Unload());
         }
@@ -27,9 +27,9 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest3()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new PluginFileStore());
-            module.Load(path);
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck"));
+            var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
+            module.Load("TestLibrary.dll");
 
             var proxy = module.CreateInstance(assembly =>
             {
@@ -44,9 +44,9 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest4()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new PluginFileStore());
-            module.Load(path);
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck"));
+            var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
+            module.Load("TestLibrary.dll");
 
             var proxy = module.CreateInstance(assembly =>
             {
@@ -64,9 +64,9 @@ namespace Safin.Plugins.Tests.Assembly
         public void LoadTest5()
         {
             var currentDir = Directory.GetCurrentDirectory();
-            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck\\TestLibrary.dll"));
-            var module = new AssemblyModuleUnloadable(new PluginFileStore());
-            module.Load(path);
+            var path = Path.GetFullPath(Path.Combine(currentDir, "..\\..\\..\\..\\FunctionalityÑheck"));
+            var module = new AssemblyModuleUnloadable(new PluginFileStore(path));
+            module.Load("TestLibrary.dll");
 
             var proxy = module.CreateInstance(assembly =>
             {

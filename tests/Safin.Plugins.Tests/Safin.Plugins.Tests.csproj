@@ -30,10 +30,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="SCX\test2.csx">
+    <None Update="Plugins\test2.csx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
-    <None Update="SCX\test1.csx">
+    <None Update="Plugins\test1.csx">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
